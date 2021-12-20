@@ -28,4 +28,6 @@ import { User } from "../models/User";
 
 let user1 = new User({ id:1 });
 
-user1.fetch();
+user1.set({name:"Zain Amjad", age:32});
+user1.save();
+//user1.fetch();
