@@ -14,7 +14,7 @@ user1.on("saved", () => {
 });
 
 user1.trigger("change");
-user1.trigger("save");
+user1.trigger("saved");
 
 
 import axios from "axios";
@@ -24,10 +24,38 @@ axios.post("http://localhost:3000/users", {name:"Zain", age:23});
 axios.get("http://localhost:3000/users/1");
 */
 
-import { User } from "../models/User";
+import { User, UserProps } from "./models/User";
+import { UserForm } from "./views/UserForm";
 
-let user1 = new User({ id:1 });
+//let user1 = new User({ id:1 });
 
-user1.set({name:"Zain Amjad", age:32});
-user1.save();
+let user = User.buildUser({ name:"Ali", age:18});
+
+user.on("save", () => {
+  console.log("Saved!!");
+});
+
+user.on("change", () => {
+  console.log(user);
+});
+
+//user.fetch();
+
+const collection = User.buildUserCollection();
+collection.on('change', () => {
+  console.log(collection);
+})
+collection.fetch();
+
+let root = document.getElementById('root')
+
+if (root) {
+let form = new UserForm(root, user);
+form.render();
+} else {
+  throw new Error('Root Element Not Found!');
+}
+//user1.set({name:"Zain Amjad", age:32});
+//user1.save();
+//user1.trigger("save");
 //user1.fetch();
