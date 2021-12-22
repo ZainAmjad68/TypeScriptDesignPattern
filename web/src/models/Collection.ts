@@ -18,7 +18,8 @@ export class Collection<T,K> {
     fetch() {
         axios.get(this.rootUrl).then((result:AxiosResponse) => {
             result.data.forEach((element: K) => {
-                this.models.push(this.deserialize(element))
+                const item = this.deserialize(element);
+                this.models.push(item);
             });
             this.trigger('change');
         })

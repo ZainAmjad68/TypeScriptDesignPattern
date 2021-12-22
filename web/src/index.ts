@@ -24,8 +24,16 @@ axios.post("http://localhost:3000/users", {name:"Zain", age:23});
 axios.get("http://localhost:3000/users/1");
 */
 
+import { Collection } from "./models/Collection";
 import { User, UserProps } from "./models/User";
-import { UserForm } from "./views/UserForm";
+import { UserEdit } from "./views/UserEdit";
+import { UserList } from "./views/UserList";
+import { UserShow } from "./views/UserShow";
+
+/*
+
+import { User, UserProps } from "./models/User";
+import { UserEdit } from "./views/UserEdit";
 
 //let user1 = new User({ id:1 });
 
@@ -50,12 +58,30 @@ collection.fetch();
 let root = document.getElementById('root')
 
 if (root) {
-let form = new UserForm(root, user);
+let form = new UserEdit(root, user);
 form.render();
+
+console.log('Nested UserEdit', form);
 } else {
   throw new Error('Root Element Not Found!');
 }
+
+*/
+
 //user1.set({name:"Zain Amjad", age:32});
 //user1.save();
 //user1.trigger("save");
 //user1.fetch();
+
+const users = new Collection('http://localhost:3000/users', (json: UserProps) => { return User.buildUser(json) });
+
+users.on('change', () => {
+  const root = document.getElementById('root');
+
+  console.log(root);
+  if (root) {
+    new UserList(root, users).render();
+  }
+})
+
+users.fetch();
