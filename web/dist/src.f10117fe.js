@@ -2623,7 +2623,7 @@ var CollectionView = /*#__PURE__*/function () {
           var model = _step.value;
           var itemParent = document.createElement('div');
           this.renderItem(model, itemParent);
-          templateElement.append(itemParent);
+          templateElement.content.append(itemParent);
         }
       } catch (err) {
         _iterator.e(err);
