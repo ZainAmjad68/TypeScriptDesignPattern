@@ -1,3 +1,4 @@
+/*
 import { Router, Request, Response, NextFunction } from "express";
 
 interface RequestWithBody extends Request {
@@ -36,7 +37,7 @@ router.post('/login', (req: RequestWithBody, res: Response) => {
         req.session = {loggedIn:true};
         res.redirect('/');
     } else {
-        res.send('You need to provide an Email.')
+        res.send('You need to provide a valid Email & Password.')
     }
 })
 
@@ -68,3 +69,4 @@ router.get('/protected', requireAuth ,(req: Request, res: Response) => {
 });
 
 export { router };
+*/
